@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from plants.models import Seed
 
@@ -97,3 +98,10 @@ class Round(models.Model):
     
     created = models.DateTimeField(auto_now_add=True)
     lock_time = models.DateTimeField()
+
+class ScoreBoard(models.Model):
+    round = models.ForeignKey(Round, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    slot_choice = models.CharField(max_length=10, null=True)
+    seed_choice = models.CharField(max_length=100, null=True)
+    win_status = models.NullBooleanField()
