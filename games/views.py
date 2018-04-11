@@ -6,19 +6,32 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
+from .models import Round, Board, ScoreBoard
 # Create your views here.
+class ActiveRound(TemplateView):
+    template_name = "show.html"
+    def get(self, request, pk):
+        r = Round.objects.get(pk=pk)
+        return render(request, self.template_name, {'round': r})
+    
+    def post(self, request):
+        pass
+
+    def patch(self, request):
+        pass
+
+    def delete(self, request):
+        pass
 
 class Games(TemplateView):
     template_name = "index.html"
     def get(self, request):
-        data = {}
-        data["user"] = request.user
-        return render(request, self.template_name, data)
+        rounds = Round.objects.all().filter(active=True)
+        return render(request, self.template_name, {'active_rounds': rounds})
 
 class SignIn(TemplateView):
     template_name = "welcome.html"
     signup_form = UserCreationForm
-    # login_form = 
 
     def get(self, request):
         return render(request, self.template_name, {'signup_form': self.signup_form, "signup": "invisible", "login": "invisible"})

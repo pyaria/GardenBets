@@ -1,6 +1,11 @@
 <div align="center">
     <h1>Welcome, {{user.username}}</h1>
-    <h3>Choose your active rounds and make your wagers</h3>
+    <h3>Here are the current rounds you can play in:</h3>
     <div>
+        <list>
+            {% for round in active_rounds %}
+                <ol><h3><a href="{% url 'round' pk=round.id %}">{{ round.title }}</a></h3></ol>
+            {% endfor %}
+        </list>
     </div>
 </div>

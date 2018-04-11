@@ -1,0 +1,13 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+    <div align="center">
+        <h1>{{ round.title }}</h1>
+        <h3>{{ round.description }}</h3>
+    </div>
+    <hr>
+    <div align="center">
+        <img width="50%" src="{% static 'images/timelapse/2018-04-08.JPG' %}" />
+    </div>
+
+{% endblock %}
