@@ -96,8 +96,8 @@ class Round(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     
-    created = models.DateTimeField(auto_now_add=True)
     lock_time = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
 
 class ScoreBoard(models.Model):
     round = models.ForeignKey(Round, on_delete=models.PROTECT)
