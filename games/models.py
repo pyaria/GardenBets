@@ -93,8 +93,8 @@ class Round(models.Model):
     objects = models.Manager()
 
     board = models.ForeignKey(Board, on_delete=models.PROTECT)
-    winning_slot = models.CharField(max_length=10, null=True)
-    winning_seed = models.CharField(max_length=100, null=True)
+    winning_slot = models.CharField(max_length=10, blank=True, null=True)
+    winning_seed = models.CharField(max_length=100, blank=True, null=True)
     
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
