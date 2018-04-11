@@ -87,4 +87,13 @@ class Board(models.Model):
     slot_12e = models.CharField(max_length=100, null=True)
     slot_12f = models.CharField(max_length=100, null=True)
 
-# class Round(models.Model):
+class Round(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.PROTECT)
+    winning_slot = models.CharField(max_length=10, null=True)
+    winning_seed = models.CharField(max_length=100, null=True)
+    
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    
+    created = models.DateTimeField(auto_now_add=True)
+    lock_time = models.DateTimeField()
