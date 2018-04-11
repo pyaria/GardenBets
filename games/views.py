@@ -20,24 +20,13 @@ class SignIn(TemplateView):
     form = UserCreationForm
 
     def get(self, request):
-        return render(request, self.template_name, {'form': self.form})
+        return render(request, self.template_name, {'form': self.form, "signup": "invisible", "login": "invisible"})
 
     def post(self, request):
-        import ipdb
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            ipdb.set_trace()
-            user = authenticate(username=form.instance.username, password=form.instance.password)
+            user = form.save()
             login(request, user)
             return redirect("casino")
-        else:
-            ipdb.set_trace()
-            try:
-                User.objects.get(username=form.instance.username)
-                user = authenticate(username=form.instance.username, password=form.instance.password)
-                login(request, user)
-                return redirect("casino")
-            except ObjectDoesNotExist:
-                return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'login': "invisible"})
              
