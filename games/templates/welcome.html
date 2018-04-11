@@ -10,7 +10,7 @@
     <div class={{ signup }} id="signup">
         <form method="post">
             {% csrf_token %}
-            {% for f in form %}
+            {% for f in signup_form %}
                 <table>
                     <tr>
                         <th>{{ f.label_tag }}</th>
@@ -27,21 +27,21 @@
         </form>
     </div>
     <div class={{ login }} id="login">
-            <form method="post">
+            <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                {% for f in form %}
-                    <table>
-                        <tr>
-                            <th>{{ f.label_tag }}</th>
-                            <td>{{ f }}</td>
-                        </tr>
-                        {% if f.errors %}
-                            {% for error in f.errors %}
-                                <tr>{{ error }}</tr>
-                            {% endfor %}
-                        {% endif %}
-                    </table>
-                {% endfor %}
+                <table>
+                    <tr>
+                        <th>Username: </th>
+                        <td><input type="text" name="username" max_length="100" /></td>
+                    </tr>
+                    <tr>
+                        <th>Password:</th>
+                        <td><input type="password" name="password" max_length="50" /></td>
+                    </tr>
+                    {% if messages %}
+                        {{ messages }}
+                    {% endif %}
+                </table>
                 <button type="submit">Log In</button>
             </form>
         </div>

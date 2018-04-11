@@ -127,3 +127,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIR = ('static',)
 
 STATIC_ROOT = ""
+
+LOGIN_REDIRECT_URL = "casino"

@@ -17,10 +17,11 @@ class Games(TemplateView):
 
 class SignIn(TemplateView):
     template_name = "welcome.html"
-    form = UserCreationForm
+    signup_form = UserCreationForm
+    # login_form = 
 
     def get(self, request):
-        return render(request, self.template_name, {'form': self.form, "signup": "invisible", "login": "invisible"})
+        return render(request, self.template_name, {'signup_form': self.signup_form, "signup": "invisible", "login": "invisible"})
 
     def post(self, request):
         form = UserCreationForm(request.POST)
@@ -28,5 +29,5 @@ class SignIn(TemplateView):
             user = form.save()
             login(request, user)
             return redirect("casino")
-        return render(request, self.template_name, {'form': form, 'login': "invisible"})
+        return render(request, self.template_name, {'signup_form': form, 'login': "invisible"})
              
