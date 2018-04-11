@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+{% block content %}
+<div align="center">
+    <h1>Welcome To The Garden of Bets</h1>
+    <h3>Sign up or Log in to make your wagers</h3>
+    <span>
+            <button onclick="login()">Log In</button>
+            <button onclick="signup()">Sign Up</button>
+    </span>
+    <div class="invisible" id="signup">
+        <form method="post">
+            {% csrf_token %}
+            {% for f in form %}
+                <table>
+                    <tr>
+                        <th>{{ f.label_tag }}</th>
+                        <td>{{ f }}</td>
+                    </tr>
+                    {% if f.errors %}
+                        {% for error in f.errors %}
+                            <tr>{{ error }}</tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            {% endfor %}
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+    <div class="invisible" id="login">
+            <form method="post">
+                {% csrf_token %}
+                {% for f in form %}
+                    <table>
+                        <tr>
+                            <th>{{ f.label_tag }}</th>
+                            <td>{{ f }}</td>
+                        </tr>
+                        {% if f.errors %}
+                            {% for error in f.errors %}
+                                <tr>{{ error }}</tr>
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                {% endfor %}
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function login() {
+        document.getElementById("login")["className"] = "";
+        document.getElementById("signup")["className"] = "invisible";
+    }
+    function signup() {
+        document.getElementById("login")["className"] = "invisible";
+        document.getElementById("signup")["className"] = "";
+    }
+</script>
+{% endblock %}
