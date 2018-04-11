@@ -4,6 +4,7 @@ from plants.models import Seed
 
 # Create your models here.
 class Board(models.Model):
+    objects = models.Manager()
     slot_1a = models.CharField(max_length=100, null=True)
     slot_1b = models.CharField(max_length=100, null=True)
     slot_1c = models.CharField(max_length=100, null=True)
@@ -89,6 +90,8 @@ class Board(models.Model):
     slot_12f = models.CharField(max_length=100, null=True)
 
 class Round(models.Model):
+    objects = models.Manager()
+
     board = models.ForeignKey(Board, on_delete=models.PROTECT)
     winning_slot = models.CharField(max_length=10, null=True)
     winning_seed = models.CharField(max_length=100, null=True)
@@ -97,9 +100,12 @@ class Round(models.Model):
     description = models.CharField(max_length=500)
     
     lock_time = models.DateTimeField()
+    active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
 class ScoreBoard(models.Model):
+    objects = models.Manager()
+
     round = models.ForeignKey(Round, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     slot_choice = models.CharField(max_length=10, null=True)
